@@ -1,0 +1,36 @@
+[
+    {
+        "idRegra": "regras-adp-twitter",
+        "nomeFonte": "twitter",
+        "nomeAdaptador": "adaptador-twitter",
+        "nomeCampos": "id|dataHora|valorTexto|latitude|longitude|cidade",
+        "tipoCampos": "number|dateTime|string|number|number|string",
+        "valorReferenciaTexto": "valorTexto",
+        "valorReferenciaNumero": null,
+        "valorLocalizacao1" : "latitude",
+        "valorLocalizacao2" : "longitude"
+    },
+    {
+        "idRegra": "cemaden-pluviometrica",
+        "nomeFonte": "fonte-pluviometrica",
+        "nomeAdaptador": "adaptador-cemaden",
+        "nomeCampos": "latitude|longitude|cidade|dataHora|chuva|nome",
+        "tipoCampos": "dateTime|number|string",
+        "valorReferenciaTexto": "nome",
+        "valorReferenciaNumero": "chuva",
+        "valorLocalizacao1" : "city",
+        "valorLocalizacao2" : null,
+        "valorLocalizacao3" : "city"
+    },
+    {
+        "idRegra": "cemaden-hidrologica",
+        "nomeFonte": "fonte-hidrologica",
+        "nomeAdaptador": "adaptador-sensor",
+        "nomeCampos": "id|timestamp|value|city",
+        "tipoCampos": "number|dateTime|number|string",
+        "valorReferenciaTexto": null,
+        "valorReferenciaNumero": "value",
+        "valorLocalizacao1" : "city",
+        "valorLocalizacao2" : null
+    }
+]
