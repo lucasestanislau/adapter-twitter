@@ -5,8 +5,8 @@
 /adapter-twitter/.idea
 /adapter-twitter/target
 /frontend/node_modules
-/integrador-fontes/node_modules
-/produtor-series-temporais/storage
-/produtor-series-temporais/vendor
+/produtor-series/node_modules
+/integrador-fontes/storage
+/integrador-fontes/vendor
 /registrador-adaptadores/storage
 /registrador-adaptadores/vendor
