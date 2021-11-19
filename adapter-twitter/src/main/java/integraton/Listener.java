@@ -14,13 +14,9 @@ public class Listener implements StatusListener {
 
     private String path;
     private String connectionName;
-   // private ConnectionFactory connection;
-   // private Connection connectionDB;
     private SourceIntegrator integrator = new SourceIntegrator();
 
     public Listener(ConnectionFactory connection) {
-        //this.connection = connection;
-        //this.connectionDB = ConnectionFactory.getConnection();
     }
 
     @Override
@@ -40,15 +36,7 @@ public class Listener implements StatusListener {
             tweetEvent.setLongitude(status.getGeoLocation().getLongitude());
             tweetEvent.setTextValue(status.getText());
 
-            //tweetEvent.save(tweetEvent);
-
             System.out.println("Salvo Tweet: "+ tweetEvent.getId());
-           // System.out.println("Nome: "+ status.getUser().getName());
-            //System.out.println("Email: "+ status.getUser().getEmail());
-           // System.out.println("Texto: "+ status.getText().toString());
-            //System.out.println("Imagem: "+ status.getUser().get400x400ProfileImageURL());
-            //System.out.println("Latitude: "+ status.getGeoLocation().getLatitude());
-            //System.out.println("Longitude: "+ status.getGeoLocation().getLongitude());
 
             tweetEvent.enviarEventoIntegradorFontes(tweetEvent, integrator);
 

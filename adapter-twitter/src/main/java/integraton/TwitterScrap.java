@@ -12,7 +12,6 @@ public class TwitterScrap implements Runnable {
     private String accessToken = "1166120502466945027-roJRTE9r6j8gGOF6btFYpdQQTj4xaz";
     private String accessTokenSecret = "FZ5rAGOVskAnRKINQmoHbckZKEkJRdSuwBKxLsxZyYP2i";
     private String boundingBox = "-54.63,-26.51,-38.2,-4.47";
-    //private String boundingBox = "-11.06,31.49,69.93,60.16";
     private String searchWord = "";
     private FilterQuery filtre;
     private ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();

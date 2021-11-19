@@ -22,17 +22,6 @@ public class TweetEvent {
     }
 
     public void save(TweetEvent tweetEvent) {
-        /*String sql = "INSERT INTO evento(id, timeStamp, textValue, latitude, longitude, city)" +
-                " VALUES('" + tweetEvent.getId() + "', '" + tweetEvent.getTimeStamp() + "', '"+ tweetEvent.getTextValue() +"', '"+ tweetEvent.getLatitude() +"'," +
-                " '" + tweetEvent.getLongitude() + "', '"+ tweetEvent.getCity() + "' )";
-        Connection cnn = ConnectionFactory.getConnection();
-        try {
-            Statement stmt = cnn.createStatement();
-            stmt.executeUpdate(sql);
-            ConnectionFactory.close(cnn, stmt);
-        } catch (SQLException ex) {
-            Logger.getLogger(TweetEvent.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
     }
 
     public void  enviarEventoIntegradorFontes(TweetEvent tweetEvent, SourceIntegrator integrator){
