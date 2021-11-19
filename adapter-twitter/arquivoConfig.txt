@@ -4,7 +4,7 @@ connection.consumer_key=IyUz5ki2t53Y70z5BcYlr1cK2
 connection.consumer_secret=7ilU8IHGGMtheR0Hqwz8vxkBf55LTrhyLcpXlYyx6EHw6yAILs
 connection.access_token=1166120502466945027-roJRTE9r6j8gGOF6btFYpdQQTj4xaz
 connection.access_token_secret=FZ5rAGOVskAnRKINQmoHbckZKEkJRdSuwBKxLsxZyYP2i
-connection.bounding_box=-68.8,-30.9,-35.7,2.5
+connection.bounding_box=-54.0905,-25.8595,-52.047,-24.1621
 connection.search_word=
 path.save.data=D:\FACULDADE\arquivoTeste.csv
 

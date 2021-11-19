@@ -19,7 +19,8 @@ class GeradorSeriesTemporaisService
                             "index" => "00:00", "value" => 1,
                         ],                        [
                             "index" => "01:00", "value" => 5,
-                        ],                        ["index" => "02:00", "value" => 15,],
+                        ],
+                        ["index" => "02:00", "value" => 15,],
                         ["index" => "03:00", "value" => 22,],
                         [
                             "index" => "04:00", "value" => 2,

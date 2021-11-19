@@ -19,34 +19,31 @@ class Controller extends BaseController
 
     public function enviarObservacoesIntegradorFontes(Request $request)
     {
-        //$count = 0;
-        //$expect = 10;
-        // while ($count < $expect) {
-        $dadosApi = json_decode(file_get_contents(self::URL_CEMADEN_PLUVIOMETRICO));
+        $count = 0;
+        $expect = 10;
+        while ($count < $expect) {
+            $dadosApi = json_decode(file_get_contents(self::URL_CEMADEN_PLUVIOMETRICO));
 
-        foreach ($dadosApi->cemaden as $evento) {
+            foreach ($dadosApi->cemaden as $evento) {
 
-            $fields = [
-                'token' => self::TOKEN,
-                'codigo_regra'      => 'cemaden-pluviometrica',
-                'codestacao'         => $evento->codestacao,
-                'latitude'         => $evento->latitude,
-                'longitude'         => $evento->longitude,
-                'cidade'         => $evento->cidade,
-                'dataHora'         => $evento->dataHora,
-                'chuva'         => $evento->chuva ? $evento->chuva : '',
-                'tipo'         => $evento->tipo,
-            ];
+                $fields = [
+                    'token' => self::TOKEN,
+                    'codigo_regra'      => 'cemaden-pluviometrica',
+                    'codestacao'         => $evento->codestacao,
+                    'latitude'         => $evento->latitude,
+                    'longitude'         => $evento->longitude,
+                    'cidade'         => $evento->cidade,
+                    'dataHora'         => $evento->dataHora,
+                    'chuva'         => $evento->chuva ? $evento->chuva : '',
+                    'tipo'         => $evento->tipo,
+                ];
 
-            $response = Http::post(self::URL_INTEGRADOR_FONTES, $fields);
+                $response = Http::post(self::URL_INTEGRADOR_FONTES, $fields);
 
-            print_r($response);
+            }
 
-            exit();
+            $count++;
+            sleep(600);
         }
-
-        //  $count++;
-        //  sleep(600);
-        //}
     }
 }

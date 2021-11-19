@@ -9,12 +9,12 @@ function App() {
   const [dadosApi, setDadosApi] = useState([]);
   const [regras, setRegras] = useState([]);
   const [idsRegras, setIdsRegras] = useState([]);
-  const [dataBuscarInicio, setDataBuscarInicio] = useState("2021-04-11");
-  const [dataBuscarFim, setDataBuscarFim] = useState("2021-04-11");
+  const [dataBuscarInicio, setDataBuscarInicio] = useState("2021-10-20");
+  const [dataBuscarFim, setDataBuscarFim] = useState("2021-10-20");
   const [agrupador, setAgrupador] = useState("");
-  const [palavraChave, setPalavraChava] = useState("");
-  const [estado, setEstado] = useState("");
-  const [cidade, setCidade] = useState("");
+  const [palavraChave, setPalavraChava] = useState("chuva");
+  const [estado, setEstado] = useState("São paulo");
+  const [cidade, setCidade] = useState("São paulo");
 
   const handleDadosGrafico = () => {
     if (dadosApi.length < 1) {
@@ -68,7 +68,7 @@ function App() {
   /**Busca eventos API */
   const buscarEventosApi = async () => {
     const regras_ids = idsRegras.toString();
-
+console.log('agrupador', agrupador);
     api
       .get("series", {
         params: {
@@ -95,6 +95,8 @@ function App() {
 
     getRegras();
   }, []);
+
+
 
   return (
     <div className="container" style={{ marginTop: 20 }}>
@@ -196,21 +198,6 @@ function App() {
             </div>
           </div>
 
-          {/*<div className="mb-3 row">
-            <label for="inputAnalise" className="col-sm-3 col-form-label">
-              Tipo de análise
-            </label>
-            <div className="col-sm-9">
-              <select
-                className="form-select form-select"
-                aria-label=".form-select-sm example"
-              >
-                <option selected>Selecione o tipo</option>
-                <option value="minuto">Frequência</option>
-              </select>
-            </div>
-  </div>*/}
-
           <div className="row">
             {regras.map((regra) => {
               return (
@@ -238,7 +225,7 @@ function App() {
               style={{ alignItems: "end" }}
               onClick={() => buscarEventosApi()}
             >
-              Pesquisar
+              Gerar
             </button>
           </div>
         </div>

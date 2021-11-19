@@ -10,7 +10,5 @@ $router->get('/', function () use ($router) {
  * Esse componente é o registrador de adaptadores
  * 
  */
-//$router->post('/eventos', RegistrarEventoController::class . '@executar');
 $router->post('/registrar-adaptador', RegistrarRegraController::class . '@executar');
-//$router->get('/localizacoes', LocalizacoesController::class . '@executar');
 $router->get('/localizacoes-banco', Controller::class . '@setLocalizacoes');

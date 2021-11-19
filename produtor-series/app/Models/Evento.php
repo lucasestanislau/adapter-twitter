@@ -14,6 +14,6 @@ class Evento extends Model
     ];
 
     public function regra(){
-        $this->hasOne('regras', 'regra_id', 'id');
+        $this->hasOne(Regra::class, 'regra_id', 'id');
     }
 }
