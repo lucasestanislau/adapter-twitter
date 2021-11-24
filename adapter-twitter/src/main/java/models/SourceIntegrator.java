@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SourceIntegrator {
-    static String tokenAdaptador = "b73c2d22763d1ce2143a3755c1d0ad3a";
+    static String adapterToken = "b73c2d22763d1ce2143a3755c1d0ad3a";
     static CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 
     public void sendTweetEvent(TweetEvent tweetEvent) throws Exception {
@@ -27,7 +27,7 @@ public class SourceIntegrator {
         JSONObject json = new JSONObject();
         json.put("id", tweetEvent.getId());
         json.put("codigo_regra", TweetEvent.RULE_CODE);
-        json.put("token", this.tokenAdaptador);
+        json.put("token", this.getAdapterToken());
         json.put("timeStamp", tweetEvent.getTimeStamp());
         json.put("textValue", tweetEvent.getTextValue());
         json.put("latitude", Double.toString(tweetEvent.getLatitude()));
@@ -46,5 +46,13 @@ public class SourceIntegrator {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public String getAdapterToken() {
+        return adapterToken;
+    }
+
+    public void setAdapterToken(String adapterToken){
+        this.adapterToken = adapterToken;
     }
 }

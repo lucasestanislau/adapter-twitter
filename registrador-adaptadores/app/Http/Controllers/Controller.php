@@ -34,8 +34,7 @@ class Controller extends BaseController
                     $evento->estado = $response->address->state;
                     $evento->save();
                 } catch (Exception $e) {
-                    $evento->cidade = 'São Paulo';
-                    $evento->estado = 'São Paulo';
+                    return;
                 }
             }
         } while ($count > 0);

@@ -10,5 +10,5 @@ $router->get('/', function () use ($router) {
  * Esse componente é o registrador de adaptadores
  * 
  */
-$router->post('/registrar-adaptador', RegistrarRegraController::class . '@executar');
-$router->get('/localizacoes-banco', Controller::class . '@setLocalizacoes');
+$router->post('/registrar-adaptador', GerenciadorRegra::class . '@registrarRegra');
+$router->get('/tratar-localizacoes', Controller::class . '@setLocalizacoes');

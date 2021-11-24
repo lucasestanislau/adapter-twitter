@@ -3,24 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Http\Service\ListarEventosService;
+use App\Http\Service\ProdutorSeries;
 use App\Http\Service\RegistrarEventoService;
 use App\Models\Evento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ListarEventosController
+class ControladorRequisicao
 {
 
-    protected $servico;
+    protected $produtorSeries;
 
-    public function __construct(ListarEventosService $servico)
+    public function __construct(ProdutorSeries $produtorSeries)
     {
-        $this->servico = $servico;
+        $this->produtorSeries = $produtorSeries;
     }
 
     public function executar(Request $request)
     {
-       $eventos = $this->servico->executar($request->all());
+       $eventos = $this->produtorSeries->executar($request->all());
 
        return response($eventos, 200, ['x-count' => count($eventos)]);
     }

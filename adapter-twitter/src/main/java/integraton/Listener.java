@@ -12,11 +12,9 @@ import java.util.Date;
 
 public class Listener implements StatusListener {
 
-    private String path;
-    private String connectionName;
     private SourceIntegrator integrator = new SourceIntegrator();
 
-    public Listener(ConnectionFactory connection) {
+    public Listener() {
     }
 
     @Override
@@ -37,9 +35,7 @@ public class Listener implements StatusListener {
             tweetEvent.setTextValue(status.getText());
 
             System.out.println("Salvo Tweet: "+ tweetEvent.getId());
-
-            tweetEvent.enviarEventoIntegradorFontes(tweetEvent, integrator);
-
+            tweetEvent.sendToSourceIntegrator(tweetEvent, integrator);
         }
     }
 

@@ -13,7 +13,7 @@ class Regra extends Model
         'campoReferenciaNumero', 'token', 'campoReferenciaDataHora', 'campoLocalizacao1', 'campoLocalizacao2', 'campoLocalizacao3', 'descricao', 'campoCodigo', 'atributos',
     ];
 
-    static function regrasValidacao()
+    static function validacao()
     {
         return [
             'codigoRegra' => 'string|required|unique:regras,codigoRegra',

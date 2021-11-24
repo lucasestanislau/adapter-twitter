@@ -3,6 +3,6 @@ const configuration = require("../../knexfile");
 
 const config = configuration.staging;
 
-const connection = knex(config);
+const conexao = knex(config);
 
-module.exports = connection;
+module.exports = conexao;

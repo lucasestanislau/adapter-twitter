@@ -1,4 +1,4 @@
-const connection = require("../database/connection");
+const conexao = require("../database/conexao");
 
 module.exports = {
   async create(request, response) {
@@ -7,14 +7,48 @@ module.exports = {
       return response.status(401).send("Token não informado");
     }
 
-    const regra = await connection("regras")
-      .where("token", token)
-      .select("*")
-      .first();
+    let regra = null;
+
+    try {
+      regra = await conexao("regras").where("token", token).select("*").first();
+    } catch (e) {
+      return response.status(404).json({ message: "Conexão recusada" });
+    }
 
     if (!regra) {
       return response.status(401).send("Token não é válido");
     }
+
+
+    /*inicio da validação dos atributos a partir da regra */
+    let atributosTratar = JSON.parse(regra.atributos);
+
+    for (let i in atributosTratar) {
+      if (
+        !request.body[atributosTratar[i].nome] &&
+        request.body[atributosTratar[i].nome] != 0
+      ) {
+        console.log("Erro ao registrar evento");
+        return response.status(404).json({
+          message:
+            "atributo cadastrado na regra que não foi informado na requisição: " +
+            atributosTratar[i].nome,
+        });
+      }
+
+      if (atributosTratar[i].tipo === "string") {
+        if (!isNaN(request.body[atributosTratar[i].nome])) {
+          console.log("atributo não é uma string");
+        }
+      }
+
+      if (atributosTratar[i].tipo === "number") {
+        if (isNaN(request.body[atributosTratar[i].nome])) {
+          console.log("atributo não é um number");
+        }
+      }
+    }
+
     const atributos = request.body;
 
     let eventoCidade = null;
@@ -53,10 +87,16 @@ module.exports = {
       valorTexto: eventoValorTexto,
     };
 
-    const eventoCadastrado = await connection("eventos").insert(evento);
+    const eventoCadastrado = await conexao("eventos").insert(evento);
 
-    console.log("evento registrado: " + eventoCadastrado);
+    if (eventoCadastrado) {
+      console.log("evento registrado: " + eventoCadastrado);
 
-    return response.status(201).json("ok");
+      return response.status(201).json("ok");
+    } else {
+      console.log("Erro ao registrar evento");
+
+      return response.status(404).json({ error: true });
+    }
   },
 };

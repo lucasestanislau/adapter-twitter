@@ -24,7 +24,7 @@ public class TweetEvent {
     public void save(TweetEvent tweetEvent) {
     }
 
-    public void  enviarEventoIntegradorFontes(TweetEvent tweetEvent, SourceIntegrator integrator){
+    public void  sendToSourceIntegrator(TweetEvent tweetEvent, SourceIntegrator integrator){
         try {
             integrator.sendTweetEvent(tweetEvent);
         }catch (Exception ex){

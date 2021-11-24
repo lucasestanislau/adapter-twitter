@@ -6,7 +6,7 @@ use App\Models\Evento;
 use App\Models\Regra;
 use DateTime;
 
-class ListarEventosService
+class ProdutorSeries
 {
 
     public function executar($atributos)
@@ -30,35 +30,11 @@ class ListarEventosService
 
                 if ($regraCadastrada->campoReferenciaTexto !== null) {
 
-                    //chamar método para pegar frequência de texto aparecendo com a 
                     $this->getEventosFrequenciaTexto($palavraChave, $dataInicio, $dataFim, $regraCadastrada, $agrupador, $retorno, $countRegra, $cidade, $estado);
                 } else if ($regraCadastrada->campoReferenciaNumero !== null) {
 
                     $this->getEventosMediaNumerico($dataInicio, $dataFim, $regraCadastrada, $agrupador, $retorno, $countRegra, $cidade, $estado);
                 }
-
-
-                /*  $eventos =  Evento::where('regra_id', $idRegra)->whereDate('dataHora', '=', $atributos['data'])->get();
-
-
-                $retorno[$countRegra]['regra_id'] = $idRegra;
-                $retorno[$countRegra]['adaptador'] = $regraCadastrada->nomeAdaptador;
-                $retorno[$countRegra]['codigoRegra'] = $regraCadastrada->codigoRegra;
-                $retorno[$countRegra]['palavraChave'] = '';
-
-                for ($i = 0; $i < 24; $i++) {
-                    $valoresEncontrados = [];
-                    foreach ($eventos as $evento) {
-                        $date = new DateTime();
-                        $date->setTimestamp(strtotime($evento->dataHora));
-                        if (intval($date->format('H')) == $i) {
-                            $valoresEncontrados[] = $evento->valorNumero ?? $$evento->valorTexto;
-                        }
-                    }
-
-                    $media = $this->calcularMediaArray($valoresEncontrados);
-                    $retorno[$countRegra]['dados'][] = ['index' => sprintf('%02d', $i) . ':00', 'valor' => $media];
-                } */
 
                 $countRegra++;
             }
@@ -109,13 +85,6 @@ class ListarEventosService
                 $retorno[$countRegra]['dados'][] = ['index' => sprintf('%02d', $i) . ':00', 'valor' => $media];
             }
         } else if ($agrupador === 'dia') {
-            /*   $eventos =  Evento::where('regra_id', $regra->id)
-                ->whereDate('dataHora', '>=', $dataInicio)
-                ->whereDate('dataHora', '<=', $dataFim)
-                ->where(['cidade' => $cidade])
-                ->where(['estado' => $estado])
-                ->get();*/
-
             $retorno[$countRegra]['regra_id'] = $regra->id;
             $retorno[$countRegra]['adaptador'] = $regra->nomeAdaptador;
             $retorno[$countRegra]['codigoRegra'] = $regra->codigoRegra;
@@ -139,15 +108,7 @@ class ListarEventosService
                     ->get();
 
                 foreach ($eventos as $evento) {
-                    //echo date_format($date, 'Y-m-d');
-
-                    //dois igual, pois ele está comparando uma string com number
-                    //if (date('d', strtotime($evento->dataHora)) == intval($date->format('d'))) {
                     $valoresEncontrados[] = $evento->valorNumero;
-                    // }
-                    /* if (intval($date->format('d')) == $i) {
-                    $valoresEncontrados[] = $evento->valorTexto;
-                } */
                 }
 
                 $media = $this->calcularMediaArray($valoresEncontrados);
@@ -185,7 +146,7 @@ class ListarEventosService
                     }
                 }
 
-                //$media = $this->calcularMediaArray($valoresEncontrados);
+               
                 $retorno[$countRegra]['dados'][] = ['index' => sprintf('%02d', $i) . ':00', 'valor' => count($valoresEncontrados)];
             }
             return;
@@ -216,18 +177,12 @@ class ListarEventosService
                 date_add($date, date_interval_create_from_date_string($i . ' days'));
                 foreach ($eventos as $evento) {
 
-                    //echo date_format($date, 'Y-m-d');
-
-                    //dois igual, pois ele está comparando uma string com number
                     if (date('d', strtotime($evento->dataHora)) == intval($date->format('d'))) {
                         $valoresEncontrados[] = $evento->valorTexto;
                     }
-                    /* if (intval($date->format('d')) == $i) {
-                        $valoresEncontrados[] = $evento->valorTexto;
-                    } */
+    
                 }
 
-                //$media = $this->calcularMediaArray($valoresEncontrados);
                 $retorno[$countRegra]['dados'][] = ['index' => $date->format('d-m'), 'valor' => count($valoresEncontrados)];
             }
         }

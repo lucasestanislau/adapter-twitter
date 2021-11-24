@@ -25,11 +25,25 @@ function App() {
     setDadosGrafico({
       labels: arrayLabels,
       datasets: dadosApi.map((dado) => {
-        const cor1 = 'rgb(' + (Math.random() * (255 - 0) + 0) + ', ' + (Math.random() * (255 - 0) + 0) + ', ' + (Math.random() * (255 - 0) + 0) + ')';
-        const cor2 = 'rgb(' + (Math.random() * (255 - 0) + 0) + ', ' + (Math.random() * (255 - 0) + 0) + ', ' + (Math.random() * (255 - 0) + 0) + ')';
-       
+        const cor1 =
+          "rgb(" +
+          (Math.random() * (255 - 0) + 0) +
+          ", " +
+          (Math.random() * (255 - 0) + 0) +
+          ", " +
+          (Math.random() * (255 - 0) + 0) +
+          ")";
+        const cor2 =
+          "rgb(" +
+          (Math.random() * (255 - 0) + 0) +
+          ", " +
+          (Math.random() * (255 - 0) + 0) +
+          ", " +
+          (Math.random() * (255 - 0) + 0) +
+          ")";
+
         return {
-          label: dado.codigoRegra,
+          label: dado.adaptador,
           fill: false,
           lineTension: 0.1,
           backgroundColor: cor1,
@@ -68,7 +82,6 @@ function App() {
   /**Busca eventos API */
   const buscarEventosApi = async () => {
     const regras_ids = idsRegras.toString();
-console.log('agrupador', agrupador);
     api
       .get("series", {
         params: {
@@ -96,10 +109,8 @@ console.log('agrupador', agrupador);
     getRegras();
   }, []);
 
-
-
   return (
-    <div className="container" style={{ marginTop: 20 }}>
+    <div className="container" style={{ marginTop: 20, fontFamily: 'Arial, Helvetica, sans-serif' }}>
       <div className="row">
         <div className="col">
           <h2>Gráfico com dados coletados pelos adaptadores</h2>
@@ -180,7 +191,7 @@ console.log('agrupador', agrupador);
           </div>
           <div className="mb-3 row">
             <label for="inputAgrupador" className="col-sm-3 col-form-label">
-              Agrupador
+              Escala temporal
             </label>
             <div className="col-sm-9">
               <select
@@ -189,7 +200,7 @@ console.log('agrupador', agrupador);
                 value={agrupador}
                 onChange={(e) => setAgrupador(e.target.value)}
               >
-                <option selected>Selecione o agrupador</option>
+                <option selected>Selecione a escala temporal</option>
                 <option value="hora">Hora</option>
                 <option value="dia">Dia</option>
                 <option value="mes">Mes</option>
@@ -200,22 +211,24 @@ console.log('agrupador', agrupador);
 
           <div className="row">
             {regras.map((regra) => {
-              return (
-                <div className="form-check" key={regra.id}>
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    onChange={(e) => {
-                      handleIdRegraCheckbox(e.target.value, e.target.checked);
-                    }}
-                    value={regra.id}
-                    id={regra.id}
-                  />
-                  <label className="form-check-label" for={regra.id}>
-                    {regra.codigoRegra}
-                  </label>
-                </div>
-              );
+              if (regra.nomeAdaptador !== "cemaden-h") {
+                return (
+                  <div className="form-check" key={regra.id}>
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      onChange={(e) => {
+                        handleIdRegraCheckbox(e.target.value, e.target.checked);
+                      }}
+                      value={regra.id}
+                      id={regra.id}
+                    />
+                    <label className="form-check-label" for={regra.id}>
+                      {regra.nomeAdaptador}
+                    </label>
+                  </div>
+                );
+              }
             })}
           </div>
           <div className="row">

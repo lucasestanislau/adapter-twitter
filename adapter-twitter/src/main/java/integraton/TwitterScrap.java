@@ -42,7 +42,7 @@ public class TwitterScrap implements Runnable {
                 .setOAuthAccessTokenSecret(accessTokenSecret);
 
         twitterStream = new TwitterStreamFactory(configurationBuilder.build()).getInstance();
-        twitterStream.addListener(new Listener(new ConnectionFactory()));
+        twitterStream.addListener(new Listener());
         configFilterWords();
         configFilterBB();
         callApi();
