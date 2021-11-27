@@ -24,6 +24,10 @@ public class SourceIntegrator {
 
     public void sendTweetEvent(TweetEvent tweetEvent) throws Exception {
 
+        if(adapterToken == ""){
+            registrarRegraAdaptador();
+        }
+
         JSONObject json = new JSONObject();
         json.put("id", tweetEvent.getId());
         json.put("codigo_regra", TweetEvent.RULE_CODE);
@@ -55,4 +59,47 @@ public class SourceIntegrator {
     public void setAdapterToken(String adapterToken){
         this.adapterToken = adapterToken;
     }
+
+    public void registrarRegraAdaptador(){
+        JSONObject json = new JSONObject();
+        json.put("codigoRegra", "cemaden-pluviometrica");
+        json.put("nomeFonte", "cemaden");
+        json.put("nomeAdaptador", "cemaden-p");
+        json.put("atributos", "[\n" +
+                "\n" +
+                "\t\t{\"nome\": \"codestacao\", \"tipo\" : \"string\"},\n" +
+                "\t\t{\"nome\": \"tipo\", \"tipo\" : \"dateTime\"},\n" +
+                "\t\t{\"nome\": \"latitude\", \"tipo\" : \"number\"},\n" +
+                "\t\t{\"nome\": \"longitude\", \"tipo\" : \"number\"},\n" +
+                "\t\t{\"nome\": \"chuva\", \"tipo\" : \"number\"},\n" +
+                "\t\t{\"nome\": \"dataHora\", \"tipo\" : \"dateTime\"},\n" +
+                "\t\t{\"nome\": \"nome\", \"tipo\" : \"string\"},\n" +
+                "\t\t{\"nome\": \"uf\", \"tipo\" : \"string\"},\n" +
+                "\t\t{\"nome\": \"cidade\", \"tipo\" : \"string\"}\n" +
+                "\t]");
+        json.put("campoReferenciaTexto", null);
+        json.put("campoReferenciaNumero", "chuva");
+        json.put("campoReferenciaDataHora", "dataHora");
+        json.put("campoLocalizacao1", "latitude");
+        json.put("campoLocalizacao2", "longitude");
+        json.put("campoLocalizacao3", "cidade");
+        json.put("campoCodigo", "codestacao");
+        json.put("descricao", "Regra referente ao adaptador que coleta dados do cemaden");
+
+        try {
+            HttpPost request = new HttpPost("http://localhost:8082/registrar-adaptador");
+            StringEntity params = new StringEntity(json.toString());
+            request.addHeader("content-type", "application/json");
+            request.setEntity(params);
+
+            CloseableHttpClient httpclient = HttpClients.createDefault();
+            httpclient.execute(request);
+            System.out.println("Regra cadastrada");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
 }
