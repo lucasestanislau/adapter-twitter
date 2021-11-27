@@ -91,3 +91,11 @@ ALTER TABLE `eventos`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `regras_codigoregra_unique` (`codigoRegra`);
 
+-- As regras já registradas:
+
+INSERT INTO `regras` (`id`, `codigoRegra`, `nomeFonte`, `nomeAdaptador`, `campoReferenciaTexto`, `campoReferenciaNumero`, `campoReferenciaDataHora`, `campoLocalizacao1`, `campoLocalizacao2`, `campoLocalizacao3`, `campoCodigo`, `descricao`, `atributos`, `token`, `created_at`, `updated_at`) VALUES
+(1, 'twitter', 'twitter', 'Sensor social - Twitter', 'textValue', NULL, 'timeStamp', 'latitude', 'longitude', NULL, 'id', 'Regra referente ao adaptador que coleta dados da rede social do twitter', '[{\"nome\":\"id\",\"tipo\":\"number\"},{\"nome\":\"codigo_regra\",\"tipo\":\"string\"},{\"nome\":\"timeStamp\",\"tipo\":\"dateTime\"},{\"nome\":\"textValue\",\"tipo\":\"string\"},{\"nome\":\"latitude\",\"tipo\":\"number\"},{\"nome\":\"longitude\",\"tipo\":\"number\"}]', 'b73c2d22763d1ce2143a3755c1d0ad3a', '2021-10-09 22:45:30', '2021-10-09 22:45:30'),
+(2, 'cemaden-hidrologico', 'cemaden', 'cemaden-h', NULL, 'nivel', 'dataHora', 'latitude', 'longitude', 'cidade', 'id', 'Regra referente ao adaptador que coleta dados do cemaden', '[{\"nome\":\"codestacao\",\"tipo\":\"string\"},{\"nome\":\"tipo\",\"tipo\":\"dateTime\"},{\"nome\":\"nivel\",\"tipo\":\"number\"},{\"nome\":\"latitude\",\"tipo\":\"number\"},{\"nome\":\"longitude\",\"tipo\":\"number\"},{\"nome\":\"chuva\",\"tipo\":\"number\"},{\"nome\":\"dataHora\",\"tipo\":\"dateTime\"},{\"nome\":\"nome\",\"tipo\":\"string\"},{\"nome\":\"uf\",\"tipo\":\"string\"},{\"nome\":\"cidade\",\"tipo\":\"string\"}]', '0a23b2bf028ca72e4ae2808962bf6ec6', '2021-10-10 04:14:36', '2021-10-10 04:14:36'),
+(4, 'cemaden-pluviometrica', 'cemaden', 'Sensor físico - Cemaden', NULL, 'chuva', 'dataHora', 'latitude', 'longitude', 'cidade', 'codestacao', 'Regra referente ao adaptador que coleta dados do cemaden', '[{\"nome\":\"codestacao\",\"tipo\":\"string\"},{\"nome\":\"tipo\",\"tipo\":\"dateTime\"},{\"nome\":\"latitude\",\"tipo\":\"number\"},{\"nome\":\"longitude\",\"tipo\":\"number\"},{\"nome\":\"chuva\",\"tipo\":\"number\"},{\"nome\":\"dataHora\",\"tipo\":\"dateTime\"},{\"nome\":\"nome\",\"tipo\":\"string\"},{\"nome\":\"uf\",\"tipo\":\"string\"},{\"nome\":\"cidade\",\"tipo\":\"string\"}]', 'c2c44284ee457a116ea7c8b067f99a3a', '2021-10-10 04:18:51', '2021-10-10 04:18:51');
+
+
