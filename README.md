@@ -25,3 +25,69 @@ apenas altere no arquivo essas opção tanto no registrador de adaptadores como 
  - Produtor de séries temporais: rodar "composer install" depois "php -S localhost:8083 -t public/"
  - Frontend: executar "npm install" e "npm start"
  
+
+Executar os comandos SQL caso não queira criar a base do zero.
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `middleware`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `eventos`
+--
+
+CREATE TABLE `eventos` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `regra_id` int(10) UNSIGNED NOT NULL,
+  `latitude` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `longitude` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cidade` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `estado` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dataHora` datetime NOT NULL,
+  `valorNumero` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `valorTexto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `codigo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `json` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`json`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `regras` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `codigoRegra` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nomeFonte` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nomeAdaptador` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `campoReferenciaTexto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `campoReferenciaNumero` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `campoReferenciaDataHora` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `campoLocalizacao1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `campoLocalizacao2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `campoLocalizacao3` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `campoCodigo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `descricao` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `atributos` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`atributos`)),
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `eventos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `eventos_regra_id_foreign` (`regra_id`);
+  
+  ALTER TABLE `regras`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `regras_codigoregra_unique` (`codigoRegra`);
+
